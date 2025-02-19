@@ -32,6 +32,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    LoginView()
+                    AppNavigation()
                 }
             }
         }
@@ -51,7 +55,17 @@ class MainActivity : ComponentActivity() {
 
 @Preview
 @Composable
-fun LoginView() {
+fun AppNavigation() {
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = "login") {
+        composable("login") { LoginView(navController) }
+        composable("fileList") { FileListView(navController) }
+    }
+}
+
+@Composable
+fun LoginView(navController: NavController) {
     Column (
         modifier = Modifier
             .fillMaxWidth()
@@ -62,7 +76,7 @@ fun LoginView() {
         KiteworksLogo()
         HeaderField()
         ServerField()
-        GoButton()
+        GoButton(navController)
         PoCTag()
     }
 }
@@ -96,13 +110,12 @@ fun ServerField() {
     )
 }
 
-@Preview
 @Composable
-fun GoButton() {
+fun GoButton(navController: NavController) {
     Button(
         modifier = Modifier
             .width(360.dp),
-        onClick = {},
+        onClick = { navController.navigate("fileList")},
         colors = ButtonDefaults.buttonColors(containerColor = Color(66, 92, 199)),
         shape = RoundedCornerShape(6.dp)
     ) {
@@ -132,4 +145,10 @@ fun PoCTag() {
             .padding(top = 425.dp),
         text = stringResource(R.string.poc_tag)
     )
+}
+
+
+@Composable
+fun FileListView(navController: NavController) {
+    Text ("This is the file list")
 }

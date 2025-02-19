@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Login View -->
+    <string name="login_header">Enter the address for your company\'s Kiteworks server</string>
+    <string name="server_url_hint">Enter your server URL</string>
+    <string name="poc_tag">This is a proof of concept for Kiteworks app</string>
+
+    <!-- Buttons -->
+    <string name="go_button_label">Go</string>
+
+    <!-- Content Description -->
+    <string name="kiteworks_logo_content_description">Kiteworks Logo</string>
+
+</resources>

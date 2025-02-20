@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -18,6 +20,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,6 +39,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.kiteworks.kiteworkskmmpoc.KtorClient
+import com.kiteworks.kiteworkskmmpoc.android.viewModel.MainViewModel
+import com.kiteworks.kiteworkskmmpoc.model.FolderResponse
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -150,5 +156,17 @@ fun PoCTag() {
 
 @Composable
 fun FileListView(navController: NavController) {
-    Text ("This is the file list")
+    val viewModel = MainViewModel(KtorClient())
+    var folders by remember { mutableStateOf<FolderResponse?>(null) }
+    LaunchedEffect(Unit) {
+        folders = viewModel.getFolders()
+    }
+
+    folders?.data?.let { folderList ->
+        LazyColumn {
+            items(folderList) { folder ->
+                Text(folder.name)
+            }
+        }
+    }
 }

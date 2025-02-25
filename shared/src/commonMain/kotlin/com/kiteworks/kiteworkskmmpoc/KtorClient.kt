@@ -1,6 +1,6 @@
 package com.kiteworks.kiteworkskmmpoc
 
-import com.kiteworks.kiteworkskmmpoc.model.FolderResponse
+import com.kiteworks.kiteworkskmmpoc.domain.FolderResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.DefaultRequest

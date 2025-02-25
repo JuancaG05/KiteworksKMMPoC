@@ -41,7 +41,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.kiteworks.kiteworkskmmpoc.KtorClient
 import com.kiteworks.kiteworkskmmpoc.android.viewModel.MainViewModel
-import com.kiteworks.kiteworkskmmpoc.model.FolderResponse
+import com.kiteworks.kiteworkskmmpoc.domain.FolderResponse
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

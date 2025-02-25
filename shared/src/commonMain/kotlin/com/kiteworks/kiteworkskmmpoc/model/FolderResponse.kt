@@ -6,5 +6,4 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class FolderResponse(
     val data: List<Folder>,
-    val metadata: Metadata
 )

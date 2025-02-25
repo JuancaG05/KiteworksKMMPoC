@@ -1,0 +1,31 @@
+CREATE TABLE Folder (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    userId INTEGER NOT NULL,
+    isShared INTEGER NOT NULL,
+    path TEXT NOT NULL,
+    parentId INTEGER NOT NULL,
+    type TEXT NOT NULL,
+    permalink TEXT NOT NULL,
+    created TEXT NOT NULL,
+    modified TEXT NOT NULL
+);
+
+getAllFolders:
+SELECT *
+FROM Folder;
+
+insertFolder:
+INSERT OR REPLACE
+INTO Folder(
+    id,
+    name,
+    userId,
+    isShared,
+    path,
+    parentId,
+    type,
+    permalink,
+    created,
+    modified
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);

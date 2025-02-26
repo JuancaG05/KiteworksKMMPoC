@@ -1,4 +1,4 @@
-CREATE TABLE Folder (
+CREATE TABLE FolderEntity (
     id INTEGER NOT NULL PRIMARY KEY,
     name TEXT NOT NULL,
     userId INTEGER NOT NULL,
@@ -13,11 +13,11 @@ CREATE TABLE Folder (
 
 getAllFolders:
 SELECT *
-FROM Folder;
+FROM FolderEntity;
 
 insertFolder:
 INSERT OR REPLACE
-INTO Folder(
+INTO FolderEntity(
     id,
     name,
     userId,

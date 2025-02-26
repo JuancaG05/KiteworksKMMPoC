@@ -1,6 +1,6 @@
 package com.kiteworks.kiteworkskmmpoc
 
-import com.kiteworks.kiteworkskmmpoc.domain.FolderResponse
+import com.kiteworks.kiteworkskmmpoc.data.folder.entities.FolderResponseRemoteEntity
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.DefaultRequest
@@ -48,9 +48,9 @@ class KtorClient {
         }
     }
 
-    suspend fun getFolders(): FolderResponse {
+    suspend fun getFolders(): FolderResponseRemoteEntity {
         try {
-            val result = getClient().get(urlString = "/rest/folders/top").body<FolderResponse>()
+            val result = getClient().get(urlString = "/rest/folders/top").body<FolderResponseRemoteEntity>()
             return result
         } catch (e: Exception) {
             throw e

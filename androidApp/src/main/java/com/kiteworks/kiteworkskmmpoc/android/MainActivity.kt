@@ -41,7 +41,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.kiteworks.kiteworkskmmpoc.KtorClient
 import com.kiteworks.kiteworkskmmpoc.android.viewModel.MainViewModel
-import com.kiteworks.kiteworkskmmpoc.domain.FolderResponse
+import com.kiteworks.kiteworkskmmpoc.data.folder.entities.FolderResponseRemoteEntity
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -157,7 +157,7 @@ fun PoCTag() {
 @Composable
 fun FileListView(navController: NavController) {
     val viewModel = MainViewModel(KtorClient())
-    var folders by remember { mutableStateOf<FolderResponse?>(null) }
+    var folders by remember { mutableStateOf<FolderResponseRemoteEntity?>(null) }
     LaunchedEffect(Unit) {
         folders = viewModel.getFolders()
     }

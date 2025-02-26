@@ -1,4 +1,4 @@
-package com.kiteworks.kiteworkskmmpoc.domain
+package com.kiteworks.kiteworkskmmpoc.domain.folder
 
 import kotlinx.serialization.Serializable
 

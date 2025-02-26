@@ -2,11 +2,11 @@ package com.kiteworks.kiteworkskmmpoc.android.viewModel
 
 
 import com.kiteworks.kiteworkskmmpoc.KtorClient
-import com.kiteworks.kiteworkskmmpoc.domain.FolderResponse
+import com.kiteworks.kiteworkskmmpoc.data.folder.entities.FolderResponseRemoteEntity
 
 class MainViewModel (
     private val ktorClient: KtorClient
 ){
 
-    suspend fun getFolders(): FolderResponse = ktorClient.getFolders()
+    suspend fun getFolders(): FolderResponseRemoteEntity = ktorClient.getFolders()
 }

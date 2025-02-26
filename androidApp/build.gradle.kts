@@ -42,6 +42,7 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
+    implementation(libs.compose.material3.extended.icons)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
     coreLibraryDesugaring(libs.android.desugaring)

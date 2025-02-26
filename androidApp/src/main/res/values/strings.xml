@@ -11,5 +11,11 @@
 
     <!-- Content Description -->
     <string name="kiteworks_logo_content_description">Kiteworks Logo</string>
+    <string name="fab_content_description">Floating Action Button</string>
+    <string name="folder_icon_content_description">Folder Icon</string>
+    <string name="arrow_back_content_description">Arrow Back</string>
+
+    <!-- Top Bar -->
+    <string name = "top_bar_title">Kiteworks</string>
 
 </resources>

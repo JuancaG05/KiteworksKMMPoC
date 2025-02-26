@@ -1,4 +1,4 @@
-package com.kiteworks.kiteworkskmmpoc.data.folder
+package com.kiteworks.kiteworkskmmpoc.data.folder.datasources
 
 import com.kiteworks.kiteworkskmmpoc.db.FolderLocalEntity
 import com.kiteworks.kiteworkskmmpoc.db.KiteworksKMMPoCDB

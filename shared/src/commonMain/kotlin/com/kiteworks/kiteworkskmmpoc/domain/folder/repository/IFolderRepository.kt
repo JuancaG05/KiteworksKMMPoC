@@ -1,7 +1,7 @@
-package com.kiteworks.kiteworkskmmpoc.data.folder
+package com.kiteworks.kiteworkskmmpoc.domain.folder.repository
 
 import com.kiteworks.kiteworkskmmpoc.domain.folder.Folder
 
-interface IFolderLocalDataSource {
+interface IFolderRepository {
     suspend fun getAllFolders(): List<Folder>
 }

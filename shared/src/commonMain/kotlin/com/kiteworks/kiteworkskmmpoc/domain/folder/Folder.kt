@@ -4,6 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Folder(
+    val id: Int,
+    val name: String,
     val userId: Int,
     val isShared: Boolean,
     val path: String,
@@ -12,6 +14,4 @@ data class Folder(
     val permalink: String,
     val created: String,
     val modified: String,
-    val name: String,
-    val id: Int,
 )

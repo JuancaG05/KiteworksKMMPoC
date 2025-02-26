@@ -1,0 +1,3 @@
+[submodule "shared/src/commonMain/kiteworks-api-kt"]
+	path = shared/src/commonMain/kiteworks-api-kt
+	url = https://github.com/DeepDiver1975/kiteworks-api-kt

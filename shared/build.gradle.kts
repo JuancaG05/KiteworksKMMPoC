@@ -37,6 +37,7 @@ kotlin {
             implementation(libs.ktor.client.auth)
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.sqlDelight.coroutinesExt)
+            implementation(project(":kiteworks-api-kt"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

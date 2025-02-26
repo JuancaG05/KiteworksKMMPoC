@@ -17,3 +17,5 @@ dependencyResolutionManagement {
 rootProject.name = "KiteworksKMMPoC"
 include(":androidApp")
 include(":shared")
+include(":app", ":kiteworks-api-kt")
+project(":kiteworks-api-kt").projectDir = File(rootDir, "shared/src/commonMain/kiteworks-api-kt")

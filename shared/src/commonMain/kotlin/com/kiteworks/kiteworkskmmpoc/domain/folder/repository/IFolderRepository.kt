@@ -1,7 +1,9 @@
 package com.kiteworks.kiteworkskmmpoc.domain.folder.repository
 
 import com.kiteworks.kiteworkskmmpoc.domain.folder.Folder
+import kotlinx.coroutines.flow.Flow
 
 interface IFolderRepository {
-    suspend fun getAllFolders(): List<Folder>
+    fun getAllFolders(): Flow<List<Folder>>
+    suspend fun refreshFolders()
 }

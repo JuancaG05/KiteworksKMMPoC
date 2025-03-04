@@ -37,12 +37,14 @@ kotlin {
             implementation(libs.ktor.client.auth)
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.sqlDelight.coroutinesExt)
+            implementation(libs.koin.core)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
         androidMain.dependencies {
             implementation(libs.sqlDelight.android)
+            implementation(libs.koin.core)
         }
         iosMain.dependencies {
             implementation(libs.sqlDelight.native)

@@ -1,4 +1,4 @@
-package com.kiteworks.kiteworkskmmpoc.android
+package com.kiteworks.kiteworkskmmpoc.android.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.kiteworks.kiteworkskmmpoc.android.ui.FileListView
-import com.kiteworks.kiteworkskmmpoc.android.ui.LoginView
+import com.kiteworks.kiteworkskmmpoc.android.presentation.folder.FolderListView
+import com.kiteworks.kiteworkskmmpoc.android.presentation.login.LoginView
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +36,6 @@ fun AppNavigation() {
 
     NavHost(navController = navController, startDestination = "login") {
         composable("login") { LoginView(navController) }
-        composable("fileList") { FileListView(navController) }
+        composable("folderList") { FolderListView(navController) }
     }
 }

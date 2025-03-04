@@ -1,4 +1,4 @@
-package com.kiteworks.kiteworkskmmpoc.android.ui
+package com.kiteworks.kiteworkskmmpoc.android.presentation.folder
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,10 +25,8 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -39,35 +37,45 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.kiteworks.kiteworkskmmpoc.KtorClient
 import com.kiteworks.kiteworkskmmpoc.android.R
-import com.kiteworks.kiteworkskmmpoc.android.viewModel.MainViewModel
-import com.kiteworks.kiteworkskmmpoc.domain.Folder
-import com.kiteworks.kiteworkskmmpoc.domain.FolderResponse
+import com.kiteworks.kiteworkskmmpoc.domain.folder.Folder
+import org.koin.androidx.compose.koinViewModel
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 @Composable
-fun FileListView(navController: NavController) {
-    val viewModel = MainViewModel(KtorClient())
-    var folders by remember { mutableStateOf<FolderResponse?>(null) }
-    LaunchedEffect(Unit) {
-        folders = viewModel.getFolders()
+fun FolderListView(
+    navController: NavController,
+    viewModel: FolderListViewModel = koinViewModel()
+) {
+    val listOfFolders by viewModel.listOfFolders.collectAsState()
+
+    LaunchedEffect(key1 = true) {
+        viewModel.refreshFolders()
     }
 
-    Scaffold (
+    Scaffold(
         topBar = { TopBar(navController) },
-        floatingActionButton = { FabButton() }
-    ) { paddingValues ->
-        folders?.data?.let { folderList ->
-            LazyColumn (
-                modifier = Modifier
-                    .padding(paddingValues = paddingValues)
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { },
+                shape = RoundedCornerShape(16.dp),
+                containerColor = Color(0xFF425CC7)
             ) {
-                items(folderList) { folder ->
-                    Folder(folder)
-                }
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = stringResource(R.string.fab_content_description),
+                    tint = Color.White
+                )
+            }
+        }
+    ) { paddingValues ->
+        LazyColumn (
+            modifier = Modifier.padding(paddingValues = paddingValues)
+        ) {
+            items(listOfFolders) { folder ->
+                Folder(folder)
             }
         }
     }
@@ -96,22 +104,6 @@ fun TopBar(navController: NavController) {
             }
         },
     )
-}
-
-@Composable
-fun FabButton() {
-    FloatingActionButton(
-        onClick = { },
-        shape = RoundedCornerShape(16.dp),
-        containerColor = Color(0xFF425CC7)
-    ) {
-        Icon(
-            imageVector = Icons.Filled.Add,
-            contentDescription = stringResource(R.string.fab_content_description),
-            tint = Color.White
-        )
-    }
-
 }
 
 @Composable

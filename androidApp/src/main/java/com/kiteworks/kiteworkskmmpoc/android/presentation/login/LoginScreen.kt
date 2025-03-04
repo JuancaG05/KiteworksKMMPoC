@@ -1,4 +1,4 @@
-package com.kiteworks.kiteworkskmmpoc.android.ui
+package com.kiteworks.kiteworkskmmpoc.android.presentation.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -76,7 +76,7 @@ fun GoButton(navController: NavController) {
     Button(
         modifier = Modifier
             .width(360.dp),
-        onClick = { navController.navigate("fileList")},
+        onClick = { navController.navigate("folderList")},
         colors = ButtonDefaults.buttonColors(containerColor = Color(66, 92, 199)),
         shape = RoundedCornerShape(6.dp)
     ) {

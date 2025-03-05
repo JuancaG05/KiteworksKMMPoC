@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.sqlDelight)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.mockmp)
 }
 
 kotlin {
@@ -41,6 +43,7 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(libs.kotlinx.coroutines.test)
         }
         androidMain.dependencies {
             implementation(libs.sqlDelight.android)
@@ -49,6 +52,12 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.sqlDelight.native)
         }
+    }
+}
+
+mockmp {
+    onTest {
+        withHelper()
     }
 }
 

@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.kiteworks.kiteworkskmmpoc.android.presentation.folder.FolderListView
-import com.kiteworks.kiteworkskmmpoc.android.presentation.login.LoginView
+import com.kiteworks.kiteworkskmmpoc.android.presentation.folder.FolderListScreen
+import com.kiteworks.kiteworkskmmpoc.android.presentation.login.LoginScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +35,7 @@ fun AppNavigation() {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "login") {
-        composable("login") { LoginView(navController) }
-        composable("folderList") { FolderListView(navController) }
+        composable("login") { LoginScreen(navController) }
+        composable("folderList") { FolderListScreen(navController) }
     }
 }

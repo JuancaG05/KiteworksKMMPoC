@@ -29,7 +29,7 @@ import androidx.navigation.NavController
 import com.kiteworks.kiteworkskmmpoc.android.R
 
 @Composable
-fun LoginView(navController: NavController) {
+fun LoginScreen(navController: NavController) {
     Column (
         modifier = Modifier
             .fillMaxWidth()

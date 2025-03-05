@@ -45,7 +45,7 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 @Composable
-fun FolderListView(
+fun FolderListScreen(
     navController: NavController,
     viewModel: FolderListViewModel = koinViewModel()
 ) {

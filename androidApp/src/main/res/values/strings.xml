@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name">Kiteworks KMM PoC</string>
+
     <!-- Login View -->
     <string name="login_header">Enter the address for your company\'s Kiteworks server</string>
     <string name="server_url_hint">Enter your server URL</string>

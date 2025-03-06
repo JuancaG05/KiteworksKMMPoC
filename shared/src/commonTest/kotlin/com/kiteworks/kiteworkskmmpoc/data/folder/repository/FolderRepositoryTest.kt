@@ -24,7 +24,7 @@ class FolderRepositoryTest: TestsWithMocks() {
 
 
     @Test
-    fun `getAllFolders returns a list of Folder`() = runTest {
+    fun `getAllFolders returns a Flow with a list of Folder`() = runTest {
         every {
             folderLocalDataSource.getAllFolders()
         } returns flowOf(listOf(FOLDER))

@@ -1,5 +1,6 @@
 package com.kiteworks.kiteworkskmmpoc.android.presentation.login
 
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,9 +28,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.kiteworks.kiteworkskmmpoc.android.R
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LoginScreen(
+    navController: NavController,
+    onClickGoButton: (Uri) -> Unit,
+    viewModel: LoginViewModel = koinViewModel()
+) {
+    var serverUrl by remember { mutableStateOf("") }
     Column (
         modifier = Modifier
             .fillMaxWidth()
@@ -39,8 +46,17 @@ fun LoginScreen(navController: NavController) {
     ) {
         KiteworksLogo()
         HeaderField()
-        ServerField()
-        GoButton(navController)
+        ServerField(
+            serverUrl,
+            { serverUrl = it }
+        )
+        GoButton(
+            // navController,
+            {
+                val authorizationRequestUri = viewModel.buildAuthorizationRequest(serverUrl)
+                onClickGoButton(authorizationRequestUri)
+            }
+        )
     }
 }
 
@@ -59,24 +75,29 @@ fun HeaderField() {
 }
 
 @Composable
-fun ServerField() {
-    var text by remember { mutableStateOf("") }
-
+fun ServerField(
+    serverUrl: String,
+    onValueChange: (String) -> Unit
+) {
     OutlinedTextField(
         modifier = Modifier
             .width(360.dp),
-        value = text,
-        onValueChange = { text = it },
+        value = serverUrl,
+        onValueChange = onValueChange,
         label = { Text(text = stringResource(R.string.server_url_hint)) },
     )
 }
 
 @Composable
-fun GoButton(navController: NavController) {
+fun GoButton(
+    //navController: NavController
+    onClick: () -> Unit
+) {
     Button(
         modifier = Modifier
             .width(360.dp),
-        onClick = { navController.navigate("folderList")},
+        onClick = onClick,
+        // { navController.navigate("folderList") },
         colors = ButtonDefaults.buttonColors(containerColor = Color(66, 92, 199)),
         shape = RoundedCornerShape(6.dp)
     ) {

@@ -1,4 +1,4 @@
-package com.kiteworks.kiteworkskmmpoc.testUtil
+package com.kiteworks.kiteworkskmmpoc.testutil
 
 import com.kiteworks.kiteworkskmmpoc.domain.folder.Folder
 

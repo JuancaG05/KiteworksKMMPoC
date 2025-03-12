@@ -2,7 +2,7 @@ package com.kiteworks.kiteworkskmmpoc.data.folder.repository
 
 import com.kiteworks.kiteworkskmmpoc.data.folder.datasources.IFolderLocalDataSource
 import com.kiteworks.kiteworkskmmpoc.data.folder.datasources.IFolderRemoteDataSource
-import com.kiteworks.kiteworkskmmpoc.testUtil.FOLDER
+import com.kiteworks.kiteworkskmmpoc.testutil.FOLDER
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest

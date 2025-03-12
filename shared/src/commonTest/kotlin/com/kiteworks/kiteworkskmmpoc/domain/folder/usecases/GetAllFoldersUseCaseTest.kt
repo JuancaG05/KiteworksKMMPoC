@@ -1,7 +1,7 @@
 package com.kiteworks.kiteworkskmmpoc.domain.folder.usecases
 
 import com.kiteworks.kiteworkskmmpoc.domain.folder.repository.IFolderRepository
-import com.kiteworks.kiteworkskmmpoc.testUtil.FOLDER
+import com.kiteworks.kiteworkskmmpoc.testutil.FOLDER
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest

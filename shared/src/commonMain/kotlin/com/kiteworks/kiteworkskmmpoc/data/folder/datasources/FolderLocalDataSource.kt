@@ -16,12 +16,12 @@ class FolderLocalDataSource(database: KiteworksKMMPoCDB): IFolderLocalDataSource
 
     override fun insertFolder(folder: Folder) {
         queries.insertFolder(
-            id = folder.id.toLong(),
+            id = folder.id,
             name = folder.name,
-            userId = folder.userId.toLong(),
+            userId = folder.userId,
             isShared = if (folder.isShared) 1L else 0L,
             path = folder.path,
-            parentId = folder.parentId.toLong(),
+            parentId = folder.parentId,
             type = folder.type,
             permalink = folder.permalink,
             created = folder.created,
@@ -31,12 +31,12 @@ class FolderLocalDataSource(database: KiteworksKMMPoCDB): IFolderLocalDataSource
 
     fun FolderLocalEntity.toModel(): Folder =
         Folder(
-            id = id.toInt(),
+            id = id,
             name = name,
-            userId = userId.toInt(),
+            userId = userId,
             isShared = isShared == 1L,
             path = path,
-            parentId = parentId.toInt(),
+            parentId = parentId,
             type = type,
             permalink = permalink,
             created = created,

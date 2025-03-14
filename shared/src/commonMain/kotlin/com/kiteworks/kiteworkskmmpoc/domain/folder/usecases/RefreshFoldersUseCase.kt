@@ -6,7 +6,7 @@ class RefreshFoldersUseCase(
     private val folderRepository: IFolderRepository
 ) {
 
-    suspend fun execute() {
-        folderRepository.refreshFolders()
+    suspend fun execute(accessToken: String) {
+        folderRepository.refreshFolders(accessToken)
     }
 }

@@ -18,9 +18,9 @@ class FolderListViewModel (
     val listOfFolders: StateFlow<List<Folder>> =
         getAllFoldersUseCase.execute().stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    fun refreshFolders() {
+    fun refreshFolders(accessToken: String) {
         viewModelScope.launch {
-            refreshFoldersUseCase.execute()
+            refreshFoldersUseCase.execute(accessToken)
         }
     }
 

@@ -7,8 +7,8 @@ import com.kiteworks.kiteworkskmmpoc.domain.folder.Folder
 
 class FolderRemoteDataSource: IFolderRemoteDataSource {
 
-    override suspend fun refreshFolders(): List<Folder> =
-        RefreshFoldersNetworkOperation().execute().toModel()
+    override suspend fun refreshFolders(accessToken: String): List<Folder> =
+        RefreshFoldersNetworkOperation().execute(accessToken).toModel()
 
     fun FolderResponseRemoteEntity.toModel(): List<Folder> {
         val folders = mutableListOf<Folder>()

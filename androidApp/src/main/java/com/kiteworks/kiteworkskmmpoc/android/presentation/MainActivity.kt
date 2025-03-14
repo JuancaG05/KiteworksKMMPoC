@@ -12,17 +12,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.kiteworks.kiteworkskmmpoc.android.presentation.folder.FolderListScreen
 import com.kiteworks.kiteworkskmmpoc.android.presentation.login.LoginScreen
 import com.kiteworks.kiteworkskmmpoc.android.presentation.login.LoginViewModel
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class MainActivity : ComponentActivity() {
@@ -39,11 +35,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AppNavigation { openBrowser(it) }
+                    AppNavigation(loginViewModel) { openBrowser(it) }
                 }
             }
         }
-        observeAccessToken()
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -64,28 +59,22 @@ class MainActivity : ComponentActivity() {
         customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         customTabsIntent.launchUrl(baseContext, uri)
     }
-
-    private fun observeAccessToken() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                loginViewModel.accessTokenFlow.collectLatest {
-                    it?.let {
-                        Toast.makeText(baseContext, "TOKEN: $it", Toast.LENGTH_LONG).show()
-                    }
-                }
-            }
-        }
-    }
 }
 
 @Composable
 fun AppNavigation(
-    onClickGoButton: (Uri) -> Unit
+    loginViewModel: LoginViewModel,
+    onClickGoButton: (Uri) -> Unit,
 ) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "login") {
-        composable("login") { LoginScreen(navController, onClickGoButton) }
-        composable("folderList") { FolderListScreen(navController) }
+        composable("login") { LoginScreen(navController, onClickGoButton, loginViewModel) }
+        composable(
+            "folderList/{accessToken}?",
+            arguments = listOf(navArgument("accessToken") { nullable = true })
+        ) { backStackEntry ->
+            val accessToken = backStackEntry.arguments?.getString("accessToken")
+            FolderListScreen(accessToken = accessToken, navController = navController) }
     }
 }

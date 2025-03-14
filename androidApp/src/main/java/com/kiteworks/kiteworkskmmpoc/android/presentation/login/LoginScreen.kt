@@ -13,6 +13,8 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,15 +30,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.kiteworks.kiteworkskmmpoc.android.R
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun LoginScreen(
     navController: NavController,
     onClickGoButton: (Uri) -> Unit,
-    viewModel: LoginViewModel = koinViewModel()
+    viewModel: LoginViewModel,
 ) {
     var serverUrl by remember { mutableStateOf("") }
+    val accessToken by viewModel.accessTokenFlow.collectAsState()
+
+    LaunchedEffect(accessToken) {
+        if (accessToken != null) {
+            val accessTokenString = accessToken?.accessToken
+            navController.navigate("folderList/$accessTokenString?")
+        }
+    }
+
+
     Column (
         modifier = Modifier
             .fillMaxWidth()
@@ -50,13 +61,10 @@ fun LoginScreen(
             serverUrl,
             { serverUrl = it }
         )
-        GoButton(
-            // navController,
-            {
-                val authorizationRequestUri = viewModel.buildAuthorizationRequest(serverUrl)
-                onClickGoButton(authorizationRequestUri)
-            }
-        )
+        GoButton {
+            val authorizationRequestUri = viewModel.buildAuthorizationRequest(serverUrl)
+            onClickGoButton(authorizationRequestUri)
+        }
     }
 }
 
@@ -90,14 +98,12 @@ fun ServerField(
 
 @Composable
 fun GoButton(
-    //navController: NavController
     onClick: () -> Unit
 ) {
     Button(
         modifier = Modifier
             .width(360.dp),
         onClick = onClick,
-        // { navController.navigate("folderList") },
         colors = ButtonDefaults.buttonColors(containerColor = Color(66, 92, 199)),
         shape = RoundedCornerShape(6.dp)
     ) {

@@ -9,17 +9,17 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.request.header
 import io.ktor.http.ContentType
 import io.ktor.http.URLProtocol
 import io.ktor.http.contentType
-import io.ktor.http.headers
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 class KtorClient {
 
     companion object {
-        fun getClient(): HttpClient {
+        fun getClient(accessToken: String? = null): HttpClient {
             return HttpClient {
                 install(ContentNegotiation) {
                     json(json = Json {
@@ -31,10 +31,18 @@ class KtorClient {
                     url {
                         host = "mobile.kiteworks.com"
                         protocol = URLProtocol.HTTPS
-                        headers {
-                            append("X-Accellion-Version", "28")
-                        }
+                        header("X-Accellion-Version", "28")
                         contentType(ContentType.Application.Json)
+                    }
+                }
+
+                if (accessToken != null) {
+                    install(Auth) {
+                        bearer {
+                            loadTokens {
+                                BearerTokens(accessToken, accessToken)
+                            }
+                        }
                     }
                 }
 

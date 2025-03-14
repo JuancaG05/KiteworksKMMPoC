@@ -35,14 +35,6 @@ class KtorClient {
                     }
                 }
 
-                install(Auth) {
-                    bearer {
-                        loadTokens {
-                            BearerTokens("ivvFZHagsFq8fyYsH9JDLktYGGfN1sIZmyaaMZhi", "ivvFZHagsFq8fyYsH9JDLktYGGfN1sIZmyaaMZhi")
-                        }
-                    }
-                }
-
             }
         }
     }

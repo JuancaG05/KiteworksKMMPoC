@@ -3,8 +3,10 @@ package com.kiteworks.kiteworkskmmpoc.data.login.network
 import com.kiteworks.kiteworkskmmpoc.data.KtorClient.Companion.getClient
 import com.kiteworks.kiteworkskmmpoc.data.login.entities.AccessTokenRemoteEntity
 import io.ktor.client.call.body
-import io.ktor.client.request.parameter
+import io.ktor.client.request.forms.FormDataContent
 import io.ktor.client.request.post
+import io.ktor.client.request.setBody
+import io.ktor.http.Parameters
 
 class GetAccessTokenNetworkOperation {
 
@@ -16,13 +18,15 @@ class GetAccessTokenNetworkOperation {
     ): AccessTokenRemoteEntity {
         try {
             val result = getClient().post(urlString = "/oauth/token") {
-                parameter("client_id", clientId)
-                parameter("grant_type", "authorization_code")
-                parameter("client_secret", clientSecret)
-                parameter("redirect_uri", redirectUri)
-                parameter("code", authorizationCode)
-            }
-            return AccessTokenRemoteEntity("a", "a")
+                setBody(FormDataContent(Parameters.build {
+                    append("client_id", clientId)
+                    append("grant_type", "authorization_code")
+                    append("client_secret", clientSecret)
+                    append("redirect_uri", redirectUri)
+                    append("code", authorizationCode)
+                }))
+            }.body<AccessTokenRemoteEntity>()
+            return result
         } catch (e: Exception) {
             throw e
         }

@@ -1,6 +1,5 @@
-package com.kiteworks.kiteworkskmmpoc.android.presentation.login
+package com.kiteworks.kiteworkskmmpoc.presentation.login
 
-import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kiteworks.kiteworkskmmpoc.domain.login.AccessToken
@@ -18,34 +17,22 @@ class LoginViewModel(
     val accessTokenFlow: StateFlow<AccessToken?> = _accessTokenFlow
 
     // TODO: Write in-situ your client_id and client_secret, but DON'T PUSH IT TO THE REPO
-    private val clientId = ""
+    val clientId = ""
     private val clientSecret = ""
 
-    private val redirectUriScheme = "oc"
-    private val redirectUriHost = "android.owncloud.com"
-    private val redirectUriPath = "/"
+    val redirectUriScheme = "oc"
+    val redirectUriHost = "android.owncloud.com"
+    val redirectUriPath = "/"
 
-    fun buildAuthorizationRequest(serverUrl: String): Uri =
-        Uri.parse("https://$serverUrl/oauth/authorize").buildUpon().apply {
-            appendQueryParameter("client_id", clientId)
-            appendQueryParameter("redirect_uri", buildRedirectUri().toString())
-            appendQueryParameter("response_type", "code")
-            appendQueryParameter("scope", "")
-            appendQueryParameter("m", "1")
-        }.build()
-
-    fun getAccessToken(authorizationCode: String) {
+    fun getAccessToken(authorizationCode: String, redirectUri: String) {
         viewModelScope.launch {
             val result = getAccessTokenUseCase.execute(
                 clientId = clientId,
                 clientSecret = clientSecret,
-                redirectUri = buildRedirectUri().toString(),
+                redirectUri = redirectUri,
                 authorizationCode = authorizationCode,
             )
             _accessTokenFlow.update { result }
         }
     }
-
-    private fun buildRedirectUri(): Uri =
-        Uri.Builder().scheme(redirectUriScheme).authority(redirectUriHost).path(redirectUriPath).build()
 }

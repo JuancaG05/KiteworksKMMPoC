@@ -30,6 +30,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.kiteworks.kiteworkskmmpoc.android.R
+import com.kiteworks.kiteworkskmmpoc.presentation.login.LoginViewModel
+import androidx.core.net.toUri
 
 @Composable
 fun LoginScreen(
@@ -62,7 +64,19 @@ fun LoginScreen(
             { serverUrl = it }
         )
         GoButton {
-            val authorizationRequestUri = viewModel.buildAuthorizationRequest(serverUrl)
+            val authorizationRequestUri = "https://$serverUrl/oauth/authorize".toUri().buildUpon().apply {
+                appendQueryParameter("client_id", viewModel.clientId)
+                appendQueryParameter("redirect_uri",
+                    Uri.Builder()
+                        .scheme(viewModel.redirectUriScheme)
+                        .authority(viewModel.redirectUriHost)
+                        .path(viewModel.redirectUriPath)
+                        .build().toString()
+                )
+                appendQueryParameter("response_type", "code")
+                appendQueryParameter("scope", "")
+                appendQueryParameter("m", "1")
+            }.build()
             onClickGoButton(authorizationRequestUri)
         }
     }

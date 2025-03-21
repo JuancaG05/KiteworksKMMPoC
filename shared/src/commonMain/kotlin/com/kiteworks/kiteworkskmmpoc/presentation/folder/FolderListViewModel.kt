@@ -1,4 +1,4 @@
-package com.kiteworks.kiteworkskmmpoc.android.presentation.folder
+package com.kiteworks.kiteworkskmmpoc.presentation.folder
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

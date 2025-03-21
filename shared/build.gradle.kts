@@ -42,6 +42,7 @@ kotlin {
             implementation(libs.kermit)
             implementation(libs.sqlDelight.coroutinesExt)
             implementation(libs.koin.core)
+            implementation(libs.androidx.lifecycle.viewmodel.compose)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

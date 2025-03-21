@@ -18,7 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.kiteworks.kiteworkskmmpoc.android.presentation.folder.FolderListScreen
 import com.kiteworks.kiteworkskmmpoc.android.presentation.login.LoginScreen
-import com.kiteworks.kiteworkskmmpoc.android.presentation.login.LoginViewModel
+import com.kiteworks.kiteworkskmmpoc.presentation.login.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class MainActivity : ComponentActivity() {
@@ -46,7 +46,14 @@ class MainActivity : ComponentActivity() {
         intent?.let {
             val authorizationCode = it.data?.getQueryParameter("code")
             if (authorizationCode != null) {
-                loginViewModel.getAccessToken(authorizationCode)
+                loginViewModel.getAccessToken(
+                    authorizationCode,
+                    Uri.Builder()
+                        .scheme(loginViewModel.redirectUriScheme)
+                        .authority(loginViewModel.redirectUriHost)
+                        .path(loginViewModel.redirectUriPath)
+                        .build().toString()
+                    )
             } else {
                 val error = it.data?.getQueryParameter("error")
                 Toast.makeText(baseContext, "ERROR: $error", Toast.LENGTH_LONG).show()

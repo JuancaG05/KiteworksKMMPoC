@@ -10,8 +10,8 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		2DBF384F2D93154B005F2075 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DEDCF402D919A3900F3A790 /* libsqlite3.tbd */; };
 		2DC7AC3C2D885E4B00B5B3CB /* FolderListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC7AC3B2D885E4B00B5B3CB /* FolderListScreen.swift */; };
-		2DEDCF412D919A3900F3A790 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DEDCF402D919A3900F3A790 /* libsqlite3.tbd */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,7 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DEDCF412D919A3900F3A790 /* libsqlite3.tbd in Frameworks */,
+				2DBF384F2D93154B005F2075 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

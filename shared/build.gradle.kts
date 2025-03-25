@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.sqlDelight)
     alias(libs.plugins.ksp)
     alias(libs.plugins.mockmp)
+    id("co.touchlab.skie") version "0.10.1"
 }
 
 kotlin {
@@ -28,13 +29,13 @@ kotlin {
         it.binaries.framework {
             baseName = "shared"
             isStatic = true
+            linkerOpts += "-lsqlite3"
         }
     }
 
     sourceSets {
         commonMain.dependencies {
             implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.cio)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.client.logging)
             implementation(libs.ktor.client.auth)
@@ -51,9 +52,11 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.sqlDelight.android)
             implementation(libs.koin.core)
+            implementation(libs.ktor.client.android)
         }
         iosMain.dependencies {
             implementation(libs.sqlDelight.native)
+            implementation(libs.ktor.client.ios)
         }
     }
 }
@@ -79,5 +82,11 @@ android {
 sqldelight {
     databases.create("KiteworksKMMPoCDB") {
         packageName.set("com.kiteworks.kiteworkskmmpoc.db")
+    }
+}
+
+skie {
+    features {
+        enableSwiftUIObservingPreview = true
     }
 }

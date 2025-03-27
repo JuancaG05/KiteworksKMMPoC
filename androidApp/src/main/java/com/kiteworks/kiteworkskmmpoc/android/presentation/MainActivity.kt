@@ -20,6 +20,7 @@ import com.kiteworks.kiteworkskmmpoc.android.presentation.folder.FolderListScree
 import com.kiteworks.kiteworkskmmpoc.android.presentation.login.LoginScreen
 import com.kiteworks.kiteworkskmmpoc.presentation.login.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import java.util.Properties
 
 class MainActivity : ComponentActivity() {
 
@@ -35,7 +36,16 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AppNavigation(loginViewModel) { openBrowser(it) }
+                    AppNavigation(loginViewModel) {
+                        val properties = Properties()
+                        properties.load(assets.open("config.properties"))
+                        val accessToken = properties.getProperty("ACCESS_TOKEN_QA")
+                        if (accessToken.isEmpty()) {
+                            openBrowser(it)
+                        } else {
+                            loginViewModel.setAccessToken(accessToken)
+                        }
+                    }
                 }
             }
         }

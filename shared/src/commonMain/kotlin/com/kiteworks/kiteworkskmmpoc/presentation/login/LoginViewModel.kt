@@ -35,4 +35,8 @@ class LoginViewModel(
             _accessTokenFlow.update { result }
         }
     }
+
+    fun setAccessToken(accessToken: String) {
+        _accessTokenFlow.update { AccessToken(accessToken, accessToken) }
+    }
 }

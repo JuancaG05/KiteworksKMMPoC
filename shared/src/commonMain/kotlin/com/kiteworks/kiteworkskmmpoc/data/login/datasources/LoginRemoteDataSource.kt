@@ -7,12 +7,14 @@ import com.kiteworks.kiteworkskmmpoc.domain.login.AccessToken
 class LoginRemoteDataSource: ILoginRemoteDataSource {
 
     override suspend fun getAccessToken(
+        serverUrl: String,
         clientId: String,
         clientSecret: String,
         redirectUri: String,
         authorizationCode: String
     ): AccessToken =
         GetAccessTokenNetworkOperation().execute(
+            serverUrl = serverUrl,
             clientId = clientId,
             clientSecret = clientSecret,
             redirectUri = redirectUri,

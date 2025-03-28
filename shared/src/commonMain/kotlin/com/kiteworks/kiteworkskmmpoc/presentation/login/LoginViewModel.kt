@@ -13,6 +13,8 @@ class LoginViewModel(
     private val getAccessTokenUseCase: GetAccessTokenUseCase,
 ): ViewModel() {
 
+    private var serverUrl = ""
+
     private val _accessTokenFlow: MutableStateFlow<AccessToken?> = MutableStateFlow(null)
     val accessTokenFlow: StateFlow<AccessToken?> = _accessTokenFlow
 
@@ -24,9 +26,16 @@ class LoginViewModel(
     val redirectUriHost = "android.owncloud.com"
     val redirectUriPath = "/"
 
+    fun getServerUrl() = serverUrl
+
+    fun setServerUrl(serverUrl: String) {
+        this.serverUrl = serverUrl
+    }
+
     fun getAccessToken(authorizationCode: String, redirectUri: String) {
         viewModelScope.launch {
             val result = getAccessTokenUseCase.execute(
+                serverUrl = serverUrl,
                 clientId = clientId,
                 clientSecret = clientSecret,
                 redirectUri = redirectUri,

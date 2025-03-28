@@ -7,9 +7,9 @@ import io.ktor.client.request.get
 
 class RefreshFoldersNetworkOperation {
 
-    suspend fun execute(accessToken: String): FolderResponseRemoteEntity {
+    suspend fun execute(serverUrl: String, accessToken: String): FolderResponseRemoteEntity {
         try {
-            val result = getClient(accessToken).get(urlString = "/rest/folders/top").body<FolderResponseRemoteEntity>()
+            val result = getClient(serverUrl, accessToken).get(urlString = "/rest/folders/top").body<FolderResponseRemoteEntity>()
             return result
         } catch (e: Exception) {
             throw e

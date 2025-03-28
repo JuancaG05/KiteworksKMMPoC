@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface IFolderRepository {
     fun getAllFolders(): Flow<List<Folder>>
-    suspend fun refreshFolders(accessToken: String)
+    suspend fun refreshFolders(serverUrl: String, accessToken: String)
 }

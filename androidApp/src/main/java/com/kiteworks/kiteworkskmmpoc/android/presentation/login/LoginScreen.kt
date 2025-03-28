@@ -44,8 +44,9 @@ fun LoginScreen(
 
     LaunchedEffect(accessToken) {
         if (accessToken != null) {
+            val authenticatedServerUrl = viewModel.getServerUrl()
             val accessTokenString = accessToken?.accessToken
-            navController.navigate("folderList/$accessTokenString?")
+            navController.navigate("folderList/$authenticatedServerUrl/$accessTokenString?")
         }
     }
 
@@ -64,6 +65,7 @@ fun LoginScreen(
             { serverUrl = it }
         )
         GoButton {
+            viewModel.setServerUrl(serverUrl)
             val authorizationRequestUri = "https://$serverUrl/oauth/authorize".toUri().buildUpon().apply {
                 appendQueryParameter("client_id", viewModel.clientId)
                 appendQueryParameter("redirect_uri",

@@ -8,12 +8,14 @@ class GetAccessTokenUseCase(
 ) {
 
     suspend fun execute(
+        serverUrl: String,
         clientId: String,
         clientSecret: String,
         redirectUri: String,
         authorizationCode: String
     ): AccessToken =
         loginRepository.getAccessToken(
+            serverUrl = serverUrl,
             clientId = clientId,
             clientSecret = clientSecret,
             redirectUri = redirectUri,

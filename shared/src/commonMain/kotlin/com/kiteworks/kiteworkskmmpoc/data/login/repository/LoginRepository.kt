@@ -9,12 +9,14 @@ class LoginRepository(
 ): ILoginRepository {
 
     override suspend fun getAccessToken(
+        serverUrl: String,
         clientId: String,
         clientSecret: String,
         redirectUri: String,
         authorizationCode: String
     ): AccessToken =
         loginRemoteDataSource.getAccessToken(
+            serverUrl = serverUrl,
             clientId = clientId,
             clientSecret = clientSecret,
             redirectUri = redirectUri,

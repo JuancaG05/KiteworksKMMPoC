@@ -47,6 +47,7 @@ import java.util.Locale
 
 @Composable
 fun FolderListScreen(
+    serverUrl: String,
     accessToken: String?,
     navController: NavController,
     viewModel: FolderListViewModel = koinViewModel()
@@ -54,7 +55,7 @@ fun FolderListScreen(
     val listOfFolders by viewModel.listOfFolders.collectAsState()
 
     LaunchedEffect(key1 = true) {
-        accessToken?.let { viewModel.refreshFolders(it) }
+        accessToken?.let { viewModel.refreshFolders(serverUrl, it) }
     }
 
     Scaffold(

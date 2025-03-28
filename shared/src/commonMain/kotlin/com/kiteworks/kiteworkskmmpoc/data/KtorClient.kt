@@ -19,7 +19,7 @@ import kotlinx.serialization.json.Json
 class KtorClient {
 
     companion object {
-        fun getClient(accessToken: String? = null): HttpClient {
+        fun getClient(hostUrl: String, accessToken: String? = null): HttpClient {
             return HttpClient {
                 install(ContentNegotiation) {
                     json(json = Json {
@@ -29,7 +29,7 @@ class KtorClient {
 
                 install(DefaultRequest) {
                     url {
-                        host = "mobile.kiteworks.com"
+                        host = hostUrl
                         protocol = URLProtocol.HTTPS
                         header("X-Accellion-Version", "28")
                         contentType(ContentType.Application.Json)

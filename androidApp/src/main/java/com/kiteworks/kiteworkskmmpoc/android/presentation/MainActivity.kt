@@ -88,10 +88,15 @@ fun AppNavigation(
     NavHost(navController = navController, startDestination = "login") {
         composable("login") { LoginScreen(navController, onClickGoButton, loginViewModel) }
         composable(
-            "folderList/{accessToken}?",
-            arguments = listOf(navArgument("accessToken") { nullable = true })
+            "folderList/{serverUrl}/{accessToken}?",
+            arguments = listOf(
+                navArgument("serverUrl") { nullable = false },
+                navArgument("accessToken") { nullable = true }
+            )
         ) { backStackEntry ->
+            val serverUrl = backStackEntry.arguments?.getString("serverUrl")!!
             val accessToken = backStackEntry.arguments?.getString("accessToken")
-            FolderListScreen(accessToken = accessToken, navController = navController) }
+            FolderListScreen(serverUrl = serverUrl, accessToken = accessToken, navController = navController)
+        }
     }
 }

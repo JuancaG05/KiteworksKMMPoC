@@ -11,13 +11,14 @@ import io.ktor.http.Parameters
 class GetAccessTokenNetworkOperation {
 
     suspend fun execute(
+        serverUrl: String,
         clientId: String,
         clientSecret: String,
         redirectUri: String,
         authorizationCode: String
     ): AccessTokenRemoteEntity {
         try {
-            val result = getClient().post(urlString = "/oauth/token") {
+            val result = getClient(serverUrl).post(urlString = "/oauth/token") {
                 setBody(FormDataContent(Parameters.build {
                     append("client_id", clientId)
                     append("grant_type", "authorization_code")

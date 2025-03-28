@@ -14,8 +14,8 @@ class FolderRepository(
     override fun getAllFolders(): Flow<List<Folder>> =
         folderLocalDataSource.getAllFolders()
 
-    override suspend fun refreshFolders(accessToken: String) {
-        folderRemoteDataSource.refreshFolders(accessToken).forEach { folder ->
+    override suspend fun refreshFolders(serverUrl: String, accessToken: String) {
+        folderRemoteDataSource.refreshFolders(serverUrl, accessToken).forEach { folder ->
             folderLocalDataSource.insertFolder(folder)
         }
     }

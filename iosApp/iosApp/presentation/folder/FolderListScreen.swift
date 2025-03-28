@@ -17,7 +17,7 @@ struct FolderListScreen: View {
             ListView(listOfFolders: listOfFolders)
         }
         .onAppear {
-            viewModel.refreshFolders(accessToken: "GdY7YBCCpf3sZkcFqNfMmxoWVtVswTfnIECEfjGg")
+            viewModel.refreshFolders(serverUrl: "mobile.kiteworks.com", accessToken: "FwtOOPPh2fe2RwxbmYv3eatTZeyUZR7Co58bLFIt")
         }
     }
 }
